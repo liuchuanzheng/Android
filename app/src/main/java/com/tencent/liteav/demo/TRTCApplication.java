@@ -8,8 +8,11 @@ public class TRTCApplication extends MultiDexApplication {
     public void onCreate() {
 
         super.onCreate();
+//        initTencentIM();
 
     }
+
+
 
 
 }

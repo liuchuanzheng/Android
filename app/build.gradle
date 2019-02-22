@@ -35,4 +35,7 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.android.support:appcompat-v7:26.+'
+
+    //腾讯im
+    api 'com.tencent.imsdk:imsdk:3.5.0.211'
 }
