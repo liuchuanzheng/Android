@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.tencent.trtc"
         minSdkVersion 16
@@ -38,4 +37,6 @@ dependencies {
 
     //腾讯im
     api 'com.tencent.imsdk:imsdk:3.5.0.211'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
 }

@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:name=".TRTCApplication"
@@ -55,5 +56,7 @@
         <activity android:name=".trtc.TRTCLiveActivity" />
         <activity android:name=".trtc.TRTCWatchLiveActivity" />
         <activity android:name=".trtc.TRTCVideoCallActivity" />
+        <activity android:name=".trtc.TRTCCallVideoActivity" />
+        <activity android:name=".trtc.CallActivity" />
     </application>
 </manifest>
