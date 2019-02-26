@@ -24,7 +24,6 @@ public class TRTCApplication extends MultiDexApplication {
         readUsers();
         mInstance = this;
         initGlobeActivity();
-        //mac
     }
 
     private void readUsers() {
