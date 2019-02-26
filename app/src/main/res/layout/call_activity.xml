@@ -59,7 +59,7 @@
             <TextView
                 android:id="@+id/tv_hangup"
                 android:gravity="center"
-                android:textColor="@color/edit_green"
+                android:textColor="@color/edit_red"
                 android:textSize="40sp"
                 android:text="挂断"
                 android:layout_width="0dp"

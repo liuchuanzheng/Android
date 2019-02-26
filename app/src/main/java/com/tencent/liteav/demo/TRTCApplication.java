@@ -27,7 +27,7 @@ public class TRTCApplication extends MultiDexApplication {
     }
 
     private void readUsers() {
-        // 如果配置有config文件，则从config文件中选择userId
+        // 如果配置有config文件，则从config文件中选择userId¡¡
         TRTCGetUserIDAndUserSig mUserInfoLoader = new TRTCGetUserIDAndUserSig(this);
         final ArrayList<String> userIds = mUserInfoLoader.getUserIdFromConfig();
         final ArrayList<String> userSigs = mUserInfoLoader.getUserSigFromConfig();
