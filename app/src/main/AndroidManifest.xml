@@ -58,5 +58,6 @@
         <activity android:name=".trtc.TRTCVideoCallActivity" />
         <activity android:name=".trtc.TRTCCallVideoActivity" />
         <activity android:name=".trtc.CallActivity" />
+        <activity android:name=".trtc.LivingUsersActivity" />
     </application>
 </manifest>

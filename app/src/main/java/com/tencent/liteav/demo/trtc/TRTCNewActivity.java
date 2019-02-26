@@ -159,7 +159,25 @@ public class TRTCNewActivity extends Activity {
                     return;
                 }
 
-                onWatchLive(roomId, userId);
+//                onWatchLive(roomId, userId);
+
+                final Intent intent = new Intent(getContext(), LivingUsersActivity.class);
+                intent.putExtra("roomId", roomId);
+                intent.putExtra("userId", userId);
+                final int sdkAppId = mUserInfoLoader.getSdkAppIdFromConfig();
+                if (sdkAppId > 0) {
+                    //（1） 从控制台获取的 json 文件中，简单获取几组已经提前计算好的 userid 和 usersig
+                    ArrayList<String> userIdList = mUserInfoLoader.getUserIdFromConfig();
+                    ArrayList<String> userSigList = mUserInfoLoader.getUserSigFromConfig();
+                    int position = userIdList.indexOf(userId);
+                    String userSig = "";
+                    if (userSigList != null && userSigList.size() > position) {
+                        userSig = userSigList.get(position);
+                    }
+                    intent.putExtra("sdkAppId", sdkAppId);
+                    intent.putExtra("userSig", userSig);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -183,6 +201,7 @@ public class TRTCNewActivity extends Activity {
                 }
 
                 onLive(roomId, userId);
+
             }
         });
     }
