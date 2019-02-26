@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
@@ -35,6 +36,7 @@ public class CallActivity extends Activity {
     TextView tv_answer;
     TextView tv_deny;
     TextView tv_hangup;
+    public static CallActivity instance = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class CallActivity extends Activity {
         type = intent.getStringExtra("type");
         username = intent.getStringExtra("username");
         initView();
+        instance = this;
     }
 
     private void initView() {
@@ -66,6 +69,81 @@ public class CallActivity extends Activity {
                 answer();
             }
         });
+        tv_hangup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_hangup();
+            }
+        });
+        tv_deny.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_deny();
+            }
+        });
+    }
+
+    private void tv_deny() {
+        //拒绝
+        //发出挂断通知.
+        //构造一条消息并添加一个文本内容
+        TIMMessage msg = new TIMMessage();
+        TIMTextElem elem = new TIMTextElem();
+        elem.setText("拒绝");
+        msg.addElement(elem);
+        //获取单聊会话
+        String peer = username;  //获取与用户 "test_user" 的会话
+        TIMConversation conversation = TIMManager.getInstance().getConversation(
+                TIMConversationType.C2C,    //会话类型：单聊
+                peer);                      //会话对方用户帐号//对方ID
+        //发送消息
+        conversation.sendMessage(msg, new TIMValueCallBack<TIMMessage>() {
+            @Override
+            public void onError(int code, String desc) {//发送消息失败
+                //错误码 code 和错误描述 desc，可用于定位请求失败原因
+                Log.d("liuchuanzheng", "send message failed. code: " + code + " errmsg: " + desc);
+
+            }
+
+            @Override
+            public void onSuccess(TIMMessage msg) {//发送消息成功
+                Log.e("liuchuanzheng", "SendMsg ok");
+            }
+        });
+        Toast.makeText(this,"拒绝",Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    private void tv_hangup() {
+        //挂断
+        //发出挂断通知.
+        //构造一条消息并添加一个文本内容
+        TIMMessage msg = new TIMMessage();
+        TIMTextElem elem = new TIMTextElem();
+        elem.setText("呼叫界面挂断");
+        msg.addElement(elem);
+        //获取单聊会话
+        String peer = username;  //获取与用户 "test_user" 的会话
+        TIMConversation conversation = TIMManager.getInstance().getConversation(
+                TIMConversationType.C2C,    //会话类型：单聊
+                peer);                      //会话对方用户帐号//对方ID
+        //发送消息
+        conversation.sendMessage(msg, new TIMValueCallBack<TIMMessage>() {
+            @Override
+            public void onError(int code, String desc) {//发送消息失败
+                //错误码 code 和错误描述 desc，可用于定位请求失败原因
+                Log.d("liuchuanzheng", "send message failed. code: " + code + " errmsg: " + desc);
+
+            }
+
+            @Override
+            public void onSuccess(TIMMessage msg) {//发送消息成功
+                Log.e("liuchuanzheng", "SendMsg ok");
+            }
+        });
+        Toast.makeText(this,"已挂断",Toast.LENGTH_SHORT).show();
+        finish();
+
     }
 
     private void answer() {
@@ -118,6 +196,7 @@ public class CallActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         RingtoneUtil2.endRingAndVibrator();
+        instance = null;
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

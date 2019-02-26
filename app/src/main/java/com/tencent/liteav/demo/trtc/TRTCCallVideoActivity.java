@@ -162,7 +162,6 @@ public class TRTCCallVideoActivity extends Activity implements View.OnClickListe
             @Override
             public void onSuccess(TIMMessage msg) {//发送消息成功
                 Log.e("liuchuanzheng", "SendMsg ok");
-                Toast.makeText(TRTCCallVideoActivity.this,"发送消息成功"+msg,Toast.LENGTH_SHORT).show();
             }
         });
     }

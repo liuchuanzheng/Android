@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -392,6 +393,7 @@ public class TRTCNewActivity extends Activity {
 
         //设置消息监听器，收到新消息时，通过此监听器回调
         TIMManager.getInstance().addMessageListener(new TIMMessageListener() {//消息监听器
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
             public boolean onNewMessages(List<TIMMessage> msgs) {//收到新消息
 
@@ -412,6 +414,12 @@ public class TRTCNewActivity extends Activity {
                                     intent.putExtra("username", msg.getSender());
                                     startActivity(intent);
                                 }else if("我接听".equals(text)){
+                                    if (CallActivity.instance != null) {
+                                        if ( !CallActivity.instance.isDestroyed() && !CallActivity.instance.isFinishing()) {
+                                            CallActivity.instance.finish();
+                                        }
+                                    }
+
                                     final Intent intent = new Intent(TRTCNewActivity.this, TRTCCallVideoActivity.class);
                                     intent.putExtra("roomId", 999);
                                     intent.putExtra("userId", TRTCApplication.loginImUserBean.userName);
@@ -424,6 +432,20 @@ public class TRTCNewActivity extends Activity {
                                     MessageEvent messageEvent = new MessageEvent();
                                     messageEvent.msgs = msgs;
                                     EventBus.getDefault().post(messageEvent);
+                                }else if("呼叫界面挂断".equals(text)){
+                                    if (CallActivity.instance != null) {
+                                        if ( !CallActivity.instance.isDestroyed() && !CallActivity.instance.isFinishing()) {
+                                            CallActivity.instance.finish();
+                                            Toast.makeText(TRTCNewActivity.this,"对方已挂断",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }else if("拒绝".equals(text)){
+                                    if (CallActivity.instance != null) {
+                                        if ( !CallActivity.instance.isDestroyed() && !CallActivity.instance.isFinishing()) {
+                                            CallActivity.instance.finish();
+                                            Toast.makeText(TRTCNewActivity.this,"对方已拒绝",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
                                 }
                             } else if (elemType == TIMElemType.Image) {
                                 //处理图片消息

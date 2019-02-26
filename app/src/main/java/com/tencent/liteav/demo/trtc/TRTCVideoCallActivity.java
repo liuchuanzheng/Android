@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.Toast;
 
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
@@ -83,7 +82,7 @@ public class TRTCVideoCallActivity extends Activity {
         recyclerView.setAdapter(myAdapter);
         myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(final int position) {
                 userIndex = position;
                 //构造一条消息并添加一个文本内容
                 TIMMessage msg = new TIMMessage();
@@ -106,7 +105,10 @@ public class TRTCVideoCallActivity extends Activity {
                     @Override
                     public void onSuccess(TIMMessage msg) {//发送消息成功
                         Log.e("liuchuanzheng", "SendMsg ok");
-                        Toast.makeText(TRTCVideoCallActivity.this,"发送消息成功"+msg,Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(TRTCVideoCallActivity.this, CallActivity.class);
+                        intent.putExtra("type", "call");
+                        intent.putExtra("username", imUserBeanUnloginList.get(position).userName);
+                        startActivity(intent);
                     }
                 });
             }
@@ -154,7 +156,6 @@ public class TRTCVideoCallActivity extends Activity {
                     @Override
                     public void onSuccess(TIMMessage msg) {//发送消息成功
                         Log.e("liuchuanzheng", "SendMsg ok");
-                        Toast.makeText(TRTCVideoCallActivity.this,"发送消息成功"+msg,Toast.LENGTH_SHORT).show();
                         onJoinRoom();
                         RingtoneUtil2.stopPlay();
                     }
