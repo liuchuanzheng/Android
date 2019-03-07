@@ -18,6 +18,7 @@
         android:textSize="26dp" />
 
     <TextView
+        android:textColor="@color/colorDanmuMsg"
         android:text="房间号"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
@@ -35,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
+        android:textColor="@color/colorDanmuMsg"
         android:text="用户名"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
@@ -90,7 +92,7 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/tv_enter"
-        android:text="@string/str_enter_room_btn"
+        android:text="进行多人视频会议"
         android:textColor="@color/colorWhite"
         android:textSize="20dp"
         android:layout_margin="20dp"

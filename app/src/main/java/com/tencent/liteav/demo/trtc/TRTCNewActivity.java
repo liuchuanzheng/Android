@@ -99,6 +99,7 @@ public class TRTCNewActivity extends Activity {
             TRTCUserSelectDialog dialog = new TRTCUserSelectDialog(getContext(), mUserInfoLoader.getUserIdFromConfig());
             dialog.setTitle("请选择登录的用户:");
             dialog.setCanceledOnTouchOutside(false);
+            dialog.setCancelable(false);
             dialog.setOnItemClickListener(new TRTCUserSelectDialog.onItemClickListener() {
                 @Override
                 public void onItemClick(int position) {

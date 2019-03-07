@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">腾讯视频通话</string>
+    <string name="app_name">视联视频通话</string>
 
     <string name="str_room_id_tips">输入房间号</string>
     <string name="str_user_id_tips">输入用户名</string>
