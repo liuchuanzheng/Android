@@ -151,7 +151,7 @@ public class TRTCCallVideoActivity extends Activity implements View.OnClickListe
                 TIMConversationType.C2C,    //会话类型：单聊
                 peer);                      //会话对方用户帐号//对方ID
         //发送消息
-        conversation.sendMessage(msg, new TIMValueCallBack<TIMMessage>() {
+        conversation.sendOnlineMessage(msg, new TIMValueCallBack<TIMMessage>() {
             @Override
             public void onError(int code, String desc) {//发送消息失败
                 //错误码 code 和错误描述 desc，可用于定位请求失败原因
