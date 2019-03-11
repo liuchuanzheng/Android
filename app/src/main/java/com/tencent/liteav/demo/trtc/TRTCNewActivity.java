@@ -3,6 +3,7 @@ package com.tencent.liteav.demo.trtc;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -356,6 +357,13 @@ public class TRTCNewActivity extends Activity {
             }
             if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.VIBRATE)) {
                 permissions.add(Manifest.permission.VIBRATE);
+            }
+            //勿扰权限.否则部分手机无法响铃震动
+            NotificationManager notificationManager =
+                    (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+                    && !notificationManager.isNotificationPolicyAccessGranted()){
+                Intent intent = new Intent( android.provider.Settings .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS); startActivity(intent);
             }
             if (permissions.size() != 0) {
                 ActivityCompat.requestPermissions(TRTCNewActivity.this,
